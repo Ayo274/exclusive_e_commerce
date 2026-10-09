@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primaryRed: #DB4444;
+  --color-cardBg: #F5F5F5;
+}
