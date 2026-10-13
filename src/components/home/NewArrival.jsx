@@ -1,7 +1,8 @@
 import SectionHeader from "../common/SectionHeader";
-import heroIphone from "../../assets/images/hero_iphone.png";
+import Women from "../../assets/images/woman_wearing_hat.png";
 import ps5Img from "../../assets/images/ps5.png";
 import speakerImg from "../../assets/images/speakers.png";
+import perfume from"../../assets/images/perfume.png";
 
 const NewArrival = () => {
   return (
@@ -30,7 +31,7 @@ const NewArrival = () => {
 
         <div className="lg:col-span-2 md:col-span-1 row-span-1 bg-black rounded-md relative flex items-end p-6 overflow-hidden group">
           <img
-            src="../assets/images/woman_wearing_hat.png"
+            src={Women}
             alt="Women's"
             className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500"
           />
@@ -62,7 +63,7 @@ const NewArrival = () => {
 
         <div className="lg:col-span-1 md:col-span-1 row-span-1 bg-black rounded-md relative flex items-end p-6 overflow-hidden group">
           <img
-            src="../assets/images/perfume.png"
+            src={perfume}
             alt="Perfume"
             className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500"
           />
