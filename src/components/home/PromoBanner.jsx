@@ -26,7 +26,7 @@ const PromoBanner = () => {
         </div>
         <div className="absolute right-0 top-0 h-full w-1/2 flex items-center justify-center">
           <img
-            src="src/assets/images/speaker.png"
+            src="../assets/images/speaker.png"
             alt="Speaker"
             className="object-contain h-full mix-blend-screen"
           />
