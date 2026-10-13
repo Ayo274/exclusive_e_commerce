@@ -1,7 +1,7 @@
 import SectionHeader from "../common/SectionHeader";
-import heroIphone from "../assets/images/hero_iphone.png";
-import ps5Img from "../assets/images/ps5.png";
-import speakerImg from "../assets/images/speakers.png";
+import heroIphone from "../../assets/images/hero_iphone.png";
+import ps5Img from "../../assets/images/ps5.png";
+import speakerImg from "../../assets/images/speakers.png";
 
 const NewArrival = () => {
   return (

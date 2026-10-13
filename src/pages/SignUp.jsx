@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import loginImg from "../assets/images/login_image.png";
+import loginImg from "../../assets/images/login_image.png";
 
 const SignUp = () => {
   const [fullName, setFullName] = useState("");
