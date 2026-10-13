@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import loginImg from "../assets/images/login_image.png";
 
 const SignUp = () => {
   const [fullName, setFullName] = useState("");
@@ -21,7 +22,7 @@ const SignUp = () => {
     <div className="flex flex-col md:flex-row min-h-screen bg-white">
       <div className="w-full md:w-1/2 bg-[#CBE4E8] flex items-center justify-center p-10">
         <img
-          src="../assets/images/login_image.png"
+          src={loginImg}
           alt="Signup"
           className="object-contain max-h-[500px]"
         />
@@ -43,8 +44,8 @@ const SignUp = () => {
               type="text"
               placeholder="Name"
               className="border-b border-gray-300 py-2 focus:outline-none focus:border-black"
-              value={fullName} 
-              onChange={(e) => setFullName(e.target.value)} 
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
               required
             />
             <input

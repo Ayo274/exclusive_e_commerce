@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import loginImg from "../assets/images/login_image.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -18,10 +19,9 @@ const Login = () => {
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-white">
-      
       <div className="w-full md:w-1/2 bg-[#CBE4E8] flex items-center justify-center p-10">
         <img
-          src="../assets/images/login_image.png"
+          src={loginImg}
           alt="Login"
           className="object-contain max-h-[500px]"
         />

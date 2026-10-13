@@ -1,4 +1,7 @@
 import SectionHeader from "../common/SectionHeader";
+import heroIphone from "../assets/images/hero_iphone.png";
+import ps5Img from "../assets/images/ps5.png";
+import speakerImg from "../assets/images/speakers.png";
 
 const NewArrival = () => {
   return (
@@ -12,7 +15,7 @@ const NewArrival = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid-rows-2 gap-4 h-[600px]">
         <div className="lg:col-span-2 md:col-span-1 row-span-2 bg-black rounded-md relative flex items-end p-6 overflow-hidden group">
           <img
-            src="../assets/images/ps5.png"
+            src={ps5Img}
             alt="PS5"
             className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500"
           />
@@ -44,7 +47,7 @@ const NewArrival = () => {
 
         <div className="lg:col-span-1 md:col-span-1 row-span-1 bg-black rounded-md relative flex items-end p-6 overflow-hidden group">
           <img
-            src="../assets/images/speakers.png"
+            src={speakerImg}
             alt="Speakers"
             className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500"
           />

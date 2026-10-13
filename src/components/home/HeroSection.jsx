@@ -1,4 +1,7 @@
 import { FaChevronRight } from "react-icons/fa";
+import heroIphone from "../assets/images/hero_iphone.png";
+import ps5Img from "../assets/images/ps5.png";
+import speakerImg from "../assets/images/speakers.png";
 
 const categories = [
   "Woman's Fashion",
@@ -48,7 +51,7 @@ const HeroSection = () => {
         </div>
         <div className="absolute right-0 top-0 h-full w-1/2 flex items-center justify-center">
           <img
-            src="../assets/images/hero_iphone.png"
+            src={heroIphone}
             alt="Hero"
             className="object-contain h-full mix-blend-screen"
           />
