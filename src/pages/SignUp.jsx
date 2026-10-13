@@ -21,7 +21,7 @@ const SignUp = () => {
     <div className="flex flex-col md:flex-row min-h-screen bg-white">
       <div className="w-full md:w-1/2 bg-[#CBE4E8] flex items-center justify-center p-10">
         <img
-          src="images/login_image.png"
+          src="src/assets/images/login_image.png"
           alt="Signup"
           className="object-contain max-h-[500px]"
         />

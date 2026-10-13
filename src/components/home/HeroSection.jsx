@@ -48,7 +48,7 @@ const HeroSection = () => {
         </div>
         <div className="absolute right-0 top-0 h-full w-1/2 flex items-center justify-center">
           <img
-            src="images/hero_iphone.png"
+            src="src/assets/images/hero_iphone.png"
             alt="Hero"
             className="object-contain h-full mix-blend-screen"
           />

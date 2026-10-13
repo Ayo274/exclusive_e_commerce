@@ -18,10 +18,10 @@ const Login = () => {
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-white">
-      {/* Left Image Section */}
+      
       <div className="w-full md:w-1/2 bg-[#CBE4E8] flex items-center justify-center p-10">
         <img
-          src="images/login_image.png"
+          src="src/assets/images/login_image.png"
           alt="Login"
           className="object-contain max-h-[500px]"
         />
