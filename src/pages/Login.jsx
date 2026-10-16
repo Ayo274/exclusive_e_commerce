@@ -1,28 +1,35 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import toast from "react-hot-toast"; // 1. Import toast
 import loginImg from "../assets/images/login_image.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    setLoading(true); 
+    setLoading(true);
+
     try {
       const result = await login(email, password);
-      if (!result.success) {
+      if (result.success) {
+        toast.success("Logged in successfully!"); // Success Toast
+      } else {
         setError(result.message);
+        toast.error(result.message || "Failed to log in"); // Error Toast
       }
     } catch (err) {
-      setError("An unexpected error occurred");
+      const errorMsg = "An unexpected error occurred";
+      setError(errorMsg);
+      toast.error(errorMsg);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -67,7 +74,7 @@ const Login = () => {
             <div className="flex items-center justify-between mt-4">
               <button
                 type="submit"
-                disabled={loading} 
+                disabled={loading}
                 className={`px-6 py-3 rounded transition-colors flex items-center justify-center gap-2 text-white ${
                   loading
                     ? "bg-gray-400 cursor-not-allowed"
