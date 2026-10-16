@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { FaHeart, FaTruck, FaUndo } from "react-icons/fa";
+import toast from "react-hot-toast"; // 1. Import toast
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { formatCurrency } from "../utils/formatCurrency";
@@ -54,6 +55,7 @@ const ProductDetails = () => {
         setQuantity(1);
       } catch (error) {
         console.error("Error fetching product details:", error);
+        toast.error("Failed to load product details");
       } finally {
         setLoading(false);
       }
@@ -116,10 +118,30 @@ const ProductDetails = () => {
       },
       quantity,
     );
+    toast.success(`${product.title || product.name || "Item"} added to cart!`);
+  };
+
+  const handleToggleWishlist = () => {
+    addToWishlist(product);
+    if (isWishlisted) {
+      toast("Removed from wishlist", { icon: "ℹ️" });
+    } else {
+      toast.success("Added to wishlist!");
+    }
   };
 
   const handleBuyNow = () => {
-    handleAddToCart();
+    addToCart(
+      {
+        ...product,
+        price: productPrice,
+        image: galleryImages[0],
+        selectedColor,
+        selectedSize,
+      },
+      quantity,
+    );
+    toast.success("Proceeding to checkout...");
     navigate("/checkout");
   };
 
@@ -139,7 +161,10 @@ const ProductDetails = () => {
         <Link to="/" className="hover:text-black">
           Products
         </Link>{" "}
-        / <span className="text-black font-semibold">{product.title}</span>
+        /{" "}
+        <span className="text-black font-semibold">
+          {product.title || product.name}
+        </span>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-10 mb-20">
@@ -171,7 +196,7 @@ const ProductDetails = () => {
           <div className="flex-1 bg-cardBg rounded-md flex items-center justify-center p-8 h-[400px] sm:h-[500px]">
             <img
               src={galleryImages[selectedImage] || product.image}
-              alt={product.title}
+              alt={product.title || product.name}
               className="w-full h-full object-contain mix-blend-multiply"
             />
           </div>
@@ -179,7 +204,9 @@ const ProductDetails = () => {
 
         {/* Product Details */}
         <div className="flex flex-col gap-4 w-full lg:w-1/2">
-          <h1 className="text-2xl font-semibold text-black">{product.title}</h1>
+          <h1 className="text-2xl font-semibold text-black">
+            {product.title || product.name}
+          </h1>
 
           {/* Rating & Stock */}
           <div className="flex items-center gap-4 text-sm">
@@ -272,15 +299,23 @@ const ProductDetails = () => {
             </div>
 
             <button
+              onClick={handleAddToCart}
+              disabled={product.countInStock === 0}
+              className="bg-gray-800 text-white px-6 py-2 rounded hover:bg-black transition-colors disabled:opacity-50 font-medium"
+            >
+              Add To Cart
+            </button>
+
+            <button
               onClick={handleBuyNow}
               disabled={product.countInStock === 0}
-              className="bg-primaryRed text-white px-10 py-2 rounded hover:bg-red-600 transition-colors disabled:opacity-50 font-medium"
+              className="bg-primaryRed text-white px-8 py-2 rounded hover:bg-red-600 transition-colors disabled:opacity-50 font-medium"
             >
               Buy Now
             </button>
 
             <button
-              onClick={() => addToWishlist(product)}
+              onClick={handleToggleWishlist}
               className={`w-10 h-10 border rounded flex items-center justify-center transition-colors ${
                 isWishlisted
                   ? "bg-primaryRed text-white border-primaryRed"

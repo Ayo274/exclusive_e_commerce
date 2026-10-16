@@ -1,4 +1,5 @@
 import { FaHeart, FaEye } from "react-icons/fa";
+import toast from "react-hot-toast"; // 1. Import toast
 import { formatCurrency } from "../../utils/formatCurrency";
 import RatingStars from "./RatingStars";
 import { useCart } from "../../context/CartContext";
@@ -29,10 +30,27 @@ const ProductCard = ({ product }) => {
 
   const isWishlisted = wishlistItems?.some((item) => item._id === product._id);
 
+  // 2. Handle Cart Action with Toast
+  const handleAddToCart = (e) => {
+    e.stopPropagation();
+    addToCart({ ...product, price, image: imageUrl });
+    toast.success(`${product.title || product.name || "Item"} added to cart!`);
+  };
+
+  // 3. Handle Wishlist Action with Toast
+  const handleToggleWishlist = (e) => {
+    e.stopPropagation();
+    addToWishlist(product);
+    if (isWishlisted) {
+      toast("Removed from wishlist", { icon: "ℹ️" });
+    } else {
+      toast.success("Added to wishlist!");
+    }
+  };
+
   return (
     <div className="group relative flex flex-col w-full max-w-[270px] mx-auto cursor-pointer font-sans">
       <div className="relative bg-cardBg h-[250px] flex items-center justify-center rounded-md overflow-hidden transition-all duration-300">
-  
         <div className="absolute top-3 left-3 flex flex-col gap-2 z-10">
           {(product.discountPercentage > 0 || product.discount > 0) && (
             <span className="bg-primaryRed text-white text-xs px-2 py-1 rounded font-semibold">
@@ -48,10 +66,7 @@ const ProductCard = ({ product }) => {
 
         <div className="absolute top-3 right-3 flex flex-col gap-2 z-10">
           <button
-            onClick={(e) => {
-              e.stopPropagation();
-              addToWishlist(product);
-            }}
+            onClick={handleToggleWishlist}
             className={`p-2 rounded-full transition-colors ${
               isWishlisted
                 ? "bg-primaryRed text-white"
@@ -60,9 +75,13 @@ const ProductCard = ({ product }) => {
           >
             <FaHeart />
           </button>
-          <button className="bg-white p-2 rounded-full hover:bg-primaryRed hover:text-white transition-colors">
+          <Link
+            to={`/product/${product._id}`}
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white p-2 rounded-full hover:bg-primaryRed hover:text-white transition-colors text-black flex items-center justify-center"
+          >
             <FaEye />
-          </button>
+          </Link>
         </div>
 
         <Link
@@ -71,16 +90,13 @@ const ProductCard = ({ product }) => {
         >
           <img
             src={imageUrl}
-            alt={product.title}
+            alt={product.title || product.name}
             className="w-[190px] h-[180px] object-contain mix-blend-multiply"
           />
         </Link>
 
         <button
-          onClick={(e) => {
-            e.stopPropagation();
-            addToCart({ ...product, price, image: imageUrl });
-          }}
+          onClick={handleAddToCart}
           className="absolute bottom-0 left-0 w-full bg-black text-white py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium"
         >
           Add To Cart
@@ -90,7 +106,7 @@ const ProductCard = ({ product }) => {
       <div className="mt-4 flex flex-col gap-2">
         <Link to={`/product/${product._id}`}>
           <h3 className="font-semibold text-base text-black truncate hover:text-primaryRed transition-colors">
-            {product.title}
+            {product.title || product.name}
           </h3>
         </Link>
 
